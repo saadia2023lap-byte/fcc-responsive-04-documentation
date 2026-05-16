@@ -1,4 +1,4 @@
-# Product Landing Page
+# Technical Documentation Page
 This is one of my projects for the **Responsive Web Design** certification from FreeCodeCamp.
 ### Tools Used
 * **HTML5**
