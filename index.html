@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technical Documentation Page</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+
+  <body>
+    <nav id="navbar">
+      <header>The Lifecycle of a Web Request</header>
+      <div class="anchors">
+        <a class="nav-link" href="#introduction">Introduction</a>
+        <a class="nav-link" href="#dns_lookup">DNS Lookup</a>
+        <a class="nav-link" href="#tcp/ip_handshake">TCP/IP Handshake</a>
+        <a class="nav-link" href="#http_requests">HTTP Requests</a>
+        <a class="nav-link" href="#server_processing">Server Processing</a>
+        <a class="nav-link" href="#browser_rendering">Browser Rendering</a>
+      </div>
+    </nav>
+    <main id="main-doc">
+      <section id="introduction" class="main-section">
+        <header>Introduction</header>
+        <p>The process of loading a webpage seems instantaneous, but it involves a complex series of handshakes and data transfers across the globe. When you enter a URL in your browser, you are triggering a request-response cycle that travels through various layers of the internet infrastructure, from your local router to massive data centers located thousands of miles away.</p>
+        <p>Understanding this cycle is fundamental for any web developer, as it helps in debugging performance issues and understanding security vulnerabilities. Every interaction on the web, whether it is scrolling through a social media feed or submitting a form, relies on this structured exchange of data between a client and a server.</p>
+      </section>
+      <section id="dns_lookup" class="main-section">
+        <header>DNS Lookup</header>
+        <p>Computers do not understand human-friendly names like google.com; instead, they communicate using numerical IP addresses. The Domain Name System (DNS) acts as the "phonebook of the internet," translating the URL you type into a specific IP address that the browser can use to find the correct server.</p>
+        <p>The lookup process follows a strict hierarchy to ensure efficiency and speed:</p>
+        <ul>
+            <li>Browser Cache: The browser checks its own internal memory first.</li>
+            <li>Operating System Cache: The system checks the local hosts file.</li>
+            <li>Recursive Resolver: Your ISP attempts to find the address for you.</li>
+            <li>Root Name Server: Directs the query to the correct Top-Level Domain.</li>
+            <li>Authoritative Nameserver: Provides the final, correct IP address.</li>
+        </ul>
+        <p class="code">
+          <code>nslookup google.com</code>
+        </p>
+      </section>
+      <section id="tcp/ip_handshake" class="main-section">
+        <header>TCP/IP Handshake</header>
+        <p>Once the IP address is known, the browser must establish a reliable connection with the target server. This is achieved through a process known as the "Three-Way Handshake," which ensures that both the client and the server are ready to send and receive data before the actual web content is transmitted.</p>
+        <p>The handshake ensures that the connection is stable using a series of synchronization signals. This prevents data loss and ensures that the server is capable of handling the upcoming request from the client.</p>
+        <p class="code">
+          <code>
+            JavaScript<br>
+            const connection = net.createConnection({ port: 80, host: '192.0.2.1' }, () => {<br>
+            console.log('TCP Handshake Successful');<br>
+            });
+          </code>
+        </p>
+      </section>
+      <section id="http_requests" class="main-section">
+        <header>HTTP Requests</header>
+        <p>With the connection established, the browser sends an HTTP Request to the server to ask for specific files. This request includes a "method"—most commonly GET for retrieving data or POST for sending it—along with the path of the resource and headers that describe the browser's capabilities.</p>
+        <p>Beyond just asking for a file, these requests often carry metadata such as cookies, which allow the server to recognize who you are. This stage is where the "conversation" between your computer and the server truly begins.</p>
+        <p class="code">
+          <code>
+            HTTP<br>
+            GET /index.html HTTP/1.1<br>
+            Host: www.example.com<br>
+            Accept-Language: en-US
+          </code>
+        </p>
+      </section>
+      <section id="server_processing" class="main-section">
+        <header>Server Processing</header>
+        <p>When the server receives the request, it acts as the "brain" of the operation to decide what data to return. Depending on the complexity of the site, the server may need to query a database to find your user profile or run backend code to build a customized HTML page on the fly.</p>
+        <p>After the processing is complete, the server packages the result into an HTTP Response. This response includes a status code and the actual content of the file, which is then sent back across the network to your browser.</p>
+        <p class="code">
+          <code>
+            {<br>
+            "status": 200,<br>
+            "message": "Success",<br>
+            "data": "&lt;html&gt;Welcome home&lt;/html&gt;"<br>
+            }
+          </code>
+        </p>
+      </section>
+      <section id="browser_rendering" class="main-section">
+        <header>Browser Rendering</header>
+        <p>The final stage occurs entirely within your browser, where the raw code is transformed into a visual interface. The browser's rendering engine parses the HTML to build the Document Object Model (DOM) and processes the CSS to create the CSS Object Model (CSSOM).</p>
+        <p>Once the structure and styles are set, the browser executes any JavaScript to add interactivity and "paints" the pixels onto your screen. This complex rendering path happens in milliseconds, allowing the user to begin interacting with the website immediately.</p>
+        <p class="code">
+          <code>
+            JavaScript<br>
+            document.getElementById('content').innerHTML = 'Page Rendered!';
+          </code>
+        </p>
+      </section>
+    </main>
+    
+  </body>
+</html>
